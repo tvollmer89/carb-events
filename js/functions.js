@@ -1,34 +1,28 @@
-import { initSearch, runSearch } from './search'
-import { triggerTab, tabEvents, radioEvents } from './tabs';
-import { mobileChecks } from './categories';
-const homeTab = document.getElementById('all'),
-  pager = document.getElementById('blog-pager'),
+import { initSearch, runSearch } from './search';
+const pager = document.getElementById('blog-pager'),
   numPerPage = 10,
-  input = document.getElementById('spot-search'),
-  checksContainer = document.getElementById('category-filters'),
-  mContainer = document.getElementById('mobile-filters'),
-  checks = checksContainer.querySelectorAll("input[type='checkbox']"),
-  mChecks = mContainer.querySelectorAll('input[type="checkbox"]'),
-  mRadios = mContainer.querySelectorAll('input[type="radio"]');
+  input = document.getElementById('events-search');
+// checksContainer = document.getElementById('category-filters'),
+// TODO: initialize dropdowns
+// mContainer = document.getElementById('mobile-filters'),
+// checks = checksContainer.querySelectorAll("input[type='checkbox']"),
+// mChecks = mContainer.querySelectorAll('input[type="checkbox"]');
 let allItems = [],
-  matchingItems = [],
-  activeTab;
+  matchingItems = [];
 let filters = {
   t: '', //text
   activeType: 'all',
   catsChecked: []
 };
 
+// TODO: update 'feed' argument since building item list from existing html instead of xml feed
 const init = feed => {
   allItems = feed;
   matchingItems = feed;
-  activeTab = homeTab;
   let pageCount = Math.ceil(allItems.length / numPerPage);
   buildPage(1);
   buildPager(1, pageCount);
   initSearch(allItems);
-  tabEvents(prepSearch);
-  radioEvents(prepSearch);
   addCategoryEvents();
   input.addEventListener('input', updateTextSearch);
 };
@@ -36,10 +30,8 @@ const init = feed => {
 /**
  * Checks filters and runs search or restarts list if there aren't any
  */
-const prepSearch = (newType = filters.activeType, newTab = activeTab) => {
-  activeTab = newTab;
+const prepSearch = (newType = filters.activeType) => {
   filters.activeType = newType;
-  console.log(`prep search activeTab: ${activeTab.id}`);
   if (
     filters.catsChecked.length > 0 ||
     filters.t.length > 2 ||
@@ -57,7 +49,8 @@ const prepSearch = (newType = filters.activeType, newTab = activeTab) => {
 // update matching items using item id's from search results
 const updateList = results => {
   if (results.length == 0) {
-    activeTab.innerHTML = `<p>No items found matching your search.</p>`;
+    // TODO: Update this to put this html onto screen
+    // activeTab.innerHTML = `<p>No items found matching your search.</p>`;
     pager.textContent = '';
     return;
   }
@@ -89,39 +82,37 @@ const updateTextSearch = e => {
   prepSearch();
 };
 
-const addCategoryEvents = () => {
-  mobileChecks();
-  checks.forEach(input => {
-    input.addEventListener('change', function(e) {
-      let val = e.target.value.toLowerCase();
-      let mCheck = mContainer.querySelector(`input[value="${e.target.value}"]`);
-      console.log(`mCheck: ${mCheck}`);
-      if (e.target.checked) {
-        filters.catsChecked.push(val);
-        mCheck.checked = true;
-      } else {
-        mCheck.checked = false;
-        let i = filters.catsChecked.indexOf(val);
-        filters.catsChecked.splice(i, 1);
-      }
-      prepSearch();
-    });
-  });
-};
+// const addCategoryEvents = () => {
+//   checks.forEach(input => {
+//     input.addEventListener('change', function(e) {
+//       let val = e.target.value.toLowerCase();
+//       let mCheck = mContainer.querySelector(`input[value="${e.target.value}"]`);
+//       console.log(`mCheck: ${mCheck}`);
+//       if (e.target.checked) {
+//         filters.catsChecked.push(val);
+//         mCheck.checked = true;
+//       } else {
+//         mCheck.checked = false;
+//         let i = filters.catsChecked.indexOf(val);
+//         filters.catsChecked.splice(i, 1);
+//       }
+//       prepSearch();
+//     });
+//   });
+// };
 
 const clearSearch = () => {
-  document.getElementById('mAll').checked = true;
-  checks.forEach(i => {
-    i.checked = false;
-  });
-  mChecks.forEach(i => {
-    i.checked = false;
-  });
+  // document.getElementById('mAll').checked = true;
+  // checks.forEach(i => {
+  //   i.checked = false;
+  // });
+  // mChecks.forEach(i => {
+  //   i.checked = false;
+  // });
 
   filters.catsChecked = [];
   filters.t = '';
   input.value = '';
-  triggerTab('#all');
   matchingItems = allItems;
   updatePage();
 };
@@ -235,24 +226,23 @@ const addPagerEvents = links => {
  */
 function displayItem(entry) {
   let html = ``;
-  /***
-   * TODO: Need to check for PDF download and if link should open in new tab!
-   *  
-   * */
-
   switch (entry.type) {
     case 'guide':
       let target = entry.linkType ? '_blank' : '_self';
       html += `<h3><a href="${entry.doclink}" target=${target}>${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-file-text"></i></span>`;
       if ('categories' in entry) {
-        html += `<span class="card-category">${entry.categories.join(', ')}</span>`;
+        html += `<span class="card-category">${entry.categories.join(
+          ', '
+        )}</span>`;
       }
       html += `<p>${entry.description}</p>`;
       break;
     case 'brochure':
       html += `<h3>${entry.title}</h3><span class="card-type me-2"><i class="bi bi-journal-album"></i></span>`;
       if ('categories' in entry) {
-        html += `<span class="card-category">${entry.categories.join(', ')}</span>`;
+        html += `<span class="card-category">${entry.categories.join(
+          ', '
+        )}</span>`;
       }
       if (entry.description != '') {
         html += `<p>${entry.description}</p>`;
@@ -262,15 +252,19 @@ function displayItem(entry) {
     case 'tool':
       html += `<h3><a href="${entry.doclink}" target="_blank">${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-calculator-fill"></i></span>`;
       if ('categories' in entry) {
-        html += `<span class="card-category">${entry.categories.join(', ')}</span>`;
+        html += `<span class="card-category">${entry.categories.join(
+          ', '
+        )}</span>`;
       }
       html += `<p>${entry.description}</p>`;
       break;
     case 'case-study':
-      if(entry.hasOwnProperty('download')){
+      if (entry.hasOwnProperty('download')) {
         html += `<h3>${entry.title}</h3><span class="card-type me-2"><i class="bi bi-journal-album"></i></span>`;
         if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(', ')}</span>`;
+          html += `<span class="card-category">${entry.categories.join(
+            ', '
+          )}</span>`;
         }
         if (entry.description != '') {
           html += `<p>${entry.description}</p>`;
@@ -279,7 +273,9 @@ function displayItem(entry) {
       } else {
         html += `<h3><a href="${entry.link}">${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-file-richtext"></i></span>`;
         if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(', ')}</span>`;
+          html += `<span class="card-category">${entry.categories.join(
+            ', '
+          )}</span>`;
         }
         html += `<p>${entry.description}</p>`;
       }
@@ -293,13 +289,17 @@ function displayItem(entry) {
         }
         html += `<h3><a href="${entry.doclink}" target=${target}>${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-mic-fill"></i></span>`;
         if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(', ')}</span>`;
+          html += `<span class="card-category">${entry.categories.join(
+            ', '
+          )}</span>`;
         }
         html += `<p>${entry.description}</p>`;
       } else {
         html += `<h3><a href="${entry.link}">${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-mic-fill"></i></span>`;
         if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(', ')}</span>`;
+          html += `<span class="card-category">${entry.categories.join(
+            ', '
+          )}</span>`;
         }
         html += `<p>${entry.description}</p>`;
       }
@@ -308,18 +308,22 @@ function displayItem(entry) {
       if (entry.hasOwnProperty('doclink')) {
         // console.log(`podcast link: ${JSON.stringify(entry)}`);
         let target = '_self';
-        if (entry.hasOwnProperty("linkType")) {
+        if (entry.hasOwnProperty('linkType')) {
           target = !entry.linkType ? '_self' : '_blank';
         }
         html += `<h3><a href="${entry.doclink}" target=${target}>${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-mic-fill"></i></span>`;
         if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(', ')}</span>`;
+          html += `<span class="card-category">${entry.categories.join(
+            ', '
+          )}</span>`;
         }
         html += `<p>${entry.description}</p>`;
       } else {
         html += `<h3><a href="${entry.link}">${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-play-circle-fill"></i></span>`;
         if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(', ')}</span>`;
+          html += `<span class="card-category">${entry.categories.join(
+            ', '
+          )}</span>`;
         }
         html += `<p>${entry.description}</p>`;
       }
@@ -328,31 +332,36 @@ function displayItem(entry) {
       if (entry.hasOwnProperty('doclink')) {
         // console.log(`podcast link: ${JSON.stringify(entry)}`);
         let target = '_self';
-        if (entry.hasOwnProperty("linkType")) {
+        if (entry.hasOwnProperty('linkType')) {
           target = !entry.linkType ? '_self' : '_blank';
         }
         html += `<h3><a href="${entry.doclink}" target=${target}>${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-mic-fill"></i></span>`;
         if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(', ')}</span>`;
+          html += `<span class="card-category">${entry.categories.join(
+            ', '
+          )}</span>`;
         }
         html += `<p>${entry.description}</p>`;
       } else {
-
         html += `<h3><a href="${entry.link}">${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-pencil-fill"></i></span>`;
         if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(', ')}</span>`;
+          html += `<span class="card-category">${entry.categories.join(
+            ', '
+          )}</span>`;
         }
         html += `<p>${entry.description}</p>`;
       }
       break;
   }
-  activeTab.innerHTML += `<div class="blog-card">${html}</div>`;
+  // TODO: Update this to change HTML on screen
+  // activeTab.innerHTML += `<div class="blog-card">${html}</div>`;
 }
 
 const buildPage = (currPage, list = allItems) => {
   const trimStart = (currPage - 1) * numPerPage;
   const trimEnd = trimStart + numPerPage;
-  activeTab.textContent = '';
+  // TODO: Update this to change HTML on screen
+  // activeTab.textContent = '';
   list.slice(trimStart, trimEnd).forEach(i => displayItem(i));
 };
 

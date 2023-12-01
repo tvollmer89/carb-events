@@ -1,0 +1,232 @@
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using Newtonsoft.Json;
+@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{
+  var typeOpts = umbraco.library.GetPreValues(14957);
+  var divOpts = umbraco.library.GetPreValues(15962);
+  var locOpts = umbraco.library.GetPreValues(15963);
+  string[] monthNames = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
+  var dateCut = CurrentPage.DateCutoff;
+  @* var events = CurrentPage.Children.Where("StartDate >= dateCut"); *@
+  @* var events = CurrentPage.ChildrenAsList.Where(x => x.IsVisible()).OrderBy("StartDate desc").FirstOrDefault(); *@
+  var events = CurrentPage.Children("Carbo_eventitem").Where("visible").OrderBy("StartDate desc");
+}
+<div id="events">
+  <div id="event-filters" class="row py-3 justify-content-center">
+    @* Event Type Dropdown  *@
+    <div class="col-12 col-md">
+      <select class="form-select bg-light" id="type">
+        <option value="">Event Type</option>
+        @{
+          while(typeOpts.MoveNext()){
+            var t = typeOpts.Current.Clone();
+            @t.MoveToFirstChild();
+            <option value="@t">@t</option>
+            while(t.MoveToNext()){
+              <option value="@t">@t</option>
+            }
+          }
+        }
+      </select>
+    </div>
+    @* Month Dropdown *@
+    <div class="col-12 col-md">
+      <select class="form-select bg-light" id="month">
+        <option value="">Month</option>
+        @{
+          for(int i = 0; i<12; i++) {
+            var m = i + 1;
+            <option value="@m">@monthNames[i]</option>
+          }
+        }
+      </select>
+    </div>
+    @* Division Dropdown  *@
+    <div class="col-12 col-md">
+      <select class="form-select bg-light" id="division">
+        <option value="">Division</option>
+        @{
+          while(divOpts.MoveNext()){
+            var d = divOpts.Current.Clone();
+            @d.MoveToFirstChild();
+            <option value="@d">@d</option>
+            while(d.MoveToNext()){
+              <option value="@d">@d</option>
+            }
+          }
+        }
+      </select>
+    </div>
+    @* Location Dropdown  *@
+    <div class="col-12 col-md">
+      <select class="form-select bg-light" id="country">
+        <option value="">Location</option>
+        @{
+          while(locOpts.MoveNext()){
+            var l = locOpts.Current.Clone();
+            @l.MoveToFirstChild();
+            <option value="@l">@l</option>
+            while(l.MoveToNext()){
+              <option value="@l">@l</option>
+            }
+          }
+        }
+      </select>
+    </div>
+    <div class="col-12 col-md-auto">
+      @* TO DO: Remove d-none div when ready for this *@
+      <div class="d-none">
+        <div class="input-group">
+          <input type="text" class="form-control" name="term" placeholder="Search Events" />
+          <button type="submit" class="btn btn-inline btn-blue" aria-label="event-search-button">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-auto text-end">
+      <a id="clear-search" class="btn btn-blue text-nowrap my-3 my-md-0 ms-md-1">Clear All</a>
+    </div>
+  </div>
+
+  <ul class="list">
+    @foreach(var item in events){
+		@* TO DO: update this for internal/external links *@
+      var target = "_blank";
+      var month = item.StartDate.Month;
+      @* make sure event is from current year  *@
+      if(DateTime.Compare(item.StartDate, dateCut) < 0 ) {
+        continue;
+      }
+      <li data-country="@item.Country" class="card card-horizontal flex-wrap col-12 align-items-center mb-3">
+        <div class="card-header col-6 col-md-2 order-1">
+          <h5 class="text-uppercase"><span class="d-none month">@month</span>@item.StartDate.ToString("MMM dd")-@item.EndDate.ToString("dd"), @item.EndDate.ToString("yyyy")</h5>
+          @if (item.HasValue("location")){
+            <span class="text-muted">@item.Location</span>
+          }
+        </div>
+        <div class="card-footer col-6 col-md-2 order-2 order-md-3 text-end">
+          @if(item.link != "") { <a href="@item.Link" target="@target" class="btn btn-blue">Learn More</a> }
+        </div>
+        <div class="w-100 d-block d-md-none"></div>
+        <div class="card-body col-12 col-md-8 order-3 order-md-2">
+          <h3><a href="@item.Url" target="@target" class="name bold">@item.Name</a></h3>
+            <span class="division text-danger">@item.Division</span>
+          @if (item.HasValue("type")){
+            <span>| </span>
+            <span class="type text-primary">@item.Type</span>
+          }
+          <br>
+          <span class="description text-muted">@item.Description</span>
+        </div>
+      </li>
+    }
+  </ul>
+  <ul id="events-pager" class="pagination"></ul>
+</div>
+
+@* list  *@
+<script src="~/scripts/list.min.js"></script>
+<script>
+  var options = {
+    valueNames: [
+      'name',
+      'division',
+      'type',
+      'description',
+      'month',
+      {data: ['country']}
+    ],
+	page: 5,
+	pagination: true
+  }
+@* TO DO: Update "page" value to show 10 when we have more data *@
+  var eventList = new List('events', options);
+
+  var filterList = (valueName, value = "") => {
+    if(value == "" || (valueName == "" && value == "")) {
+      console.log("No filter");
+      eventList.filter()
+      return;
+    }
+
+    @* !!! Filters are not working together, just resetting with every chagne!! *@
+    eventList.filter(function(item) {
+      console.log(`filter: ${JSON.stringify(item.values())}`);
+      return item.values()[valueName] == value;
+    })
+  }
+
+$('#clear-search').click(function(e) {
+  /* Reset dropdowns */
+  $('select').each(function() {
+    var $this = $(this)
+    var $styledSelect = $this.next('div.select-styled');
+    var $selectText = $styledSelect.find('span.dropdown-text');
+    var $default = $this.children('option').eq(0).text();
+    $selectText.text($this.children('option').eq(0).text());
+    $this.selectedIndex = 0;
+  });
+  filterList();
+	/**!! TO DO: clear search input **/
+});
+</script>
+
+@* Dropdown replacement *@
+<script type="text/javascript">
+  $('select').each(function () {
+    var $this = $(this),
+      numberOfOptions = $(this).children('option').length;
+    var filterCategory = this.id;
+
+    $this.addClass('select-hidden'); 
+    $this.wrap('<div class="select"></div>');
+    $this.after('<div class="select-styled"><span class="d-inline-block form-control dropdown-text"></span><span class="d-inline-block px-2 py-1 select-icon"><i class="bi bi-caret-down-fill"></i></span></div>');
+
+    var $styledSelect = $this.next('div.select-styled');
+    var $selectText = $styledSelect.find('span.dropdown-text');
+    var $default = $this.children('option').eq(0).text();
+    $selectText.text($this.children('option').eq(0).text());
+  
+    var $list = $('<ul />', {
+        'class': 'select-options'
+    }).insertAfter($styledSelect);
+  
+    for (var i = 0; i < numberOfOptions; i++) {
+        $('<li />', {
+            text: $this.children('option').eq(i).text(),
+            rel: $this.children('option').eq(i).val()
+        }).appendTo($list);
+    }
+  
+    var $listItems = $list.children('li');
+  
+    $styledSelect.click(function(e) {
+        e.stopPropagation();
+        $('div.select-styled.active').not(this).each(function(){
+            $(this).removeClass('active').next('ul.select-options').hide();
+        });
+        //if this != default change text color
+        $(this).toggleClass('active').next('ul.select-options').toggle();
+    });
+  
+    $listItems.click(function(e) {
+        e.stopPropagation();
+        $styledSelect.removeClass('active');
+        $selectText.text($(this).text());
+        $this.val($(this).attr('rel'));
+        /* call filterList on change */
+        $this.value = $(this).attr('rel');
+         console.log(`Filter: ${filterCategory} value: ${$this.value}`); 
+        filterList(filterCategory, $this.value);
+        $list.hide();
+    });
+  
+    $(document).click(function() {
+        $styledSelect.removeClass('active');
+        $list.hide();
+    });
+  });
+</script>

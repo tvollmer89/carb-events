@@ -1,3 +1,5 @@
+/** !! This is for dropdown menus NOT for form select inputs !! */
+
 import * as Popper from '@popperjs/core';
 import { Dropdown } from 'bootstrap';
 

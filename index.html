@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Events Page - Local</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/carb.min.css">
   <link rel="stylesheet" href="./scss/style.scss" />
+  <link rel="preload" href="https://test.carboline.com/media/83457/thinman.jpg" as="image">
 
   <meta name="theme-color" content="#00a1df">
 </head>
@@ -157,373 +158,230 @@
         </div>
       </div>
     </header>
-    <!-- Replace with new blog header -->
-    <div id="blog-header" class="navbar navbar-expand-lg mb-4">
-      <div class="container-lg">
-        <div class="d-flex align-items-center ie-flex">
-          <a id="blog-logo" class="navbar-brand" href="http://test.carboline.com/solution-spot/"><img src="/img/solution-spot-logo.svg" alt="Carboline's Solution Spot"></a>
-          <h1 class="visually-hidden">Solution Spot</h1>
-          <ul class="navbar-nav collapse navbar-collapse">
-            <li class="nav-item dropdown">
-              <a id="categories-dropdown" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
-              <ul id="category-dropdown" class="dropdown-menu" aria-labelledby="categories-dropdown">
-                <li>
-                  <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Coating%20Application">Coating Application</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Coating%20Inspection">Coating Inspection</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Coating%20Recommendation">Coating Recommendation</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Coating%20Science">Coating Science</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Fireproofing">Fireproofing</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Food%20and%20Beverage">Food and Beverage</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Linings">Linings</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/oil%20and%20gas">Oil and Gas</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Rail">Rail</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Water%20and%20Wastewater">Water and Wastewater</a>
-                </li>
-                <li class="d-block d-lg-none">
-                  <hr class="dropdown-divider">
-                </li>
-                <li class="d-block d-lg-none"><a href="http://test.carboline.com/resources/carboline-tech-service-podcast/" class="dropdown-item">Podcast</a></li>
-                <li class="d-block d-lg-none"><a href="http://test.carboline.com/solution-spot/categories/video" class="dropdown-item">Videos</a></li>
-              </ul>
-            </li>
-            <li class="nav-item d-none d-lg-block"><a href="http://test.carboline.com/resources/carboline-tech-service-podcast/" class="nav-link">Podcast</a></li>
-            <li class="nav-item d-none d-lg-block"><a href="http://test.carboline.com/solution-spot/categories/video" class="nav-link">Videos</a></li>
-          </ul>
+    <main role="main">
+      <section id="events-hero" class="hero">
+        <div class="container hero-text">
+          <h1 class="bold upper display-3">Events Calendar</h1>
         </div>
-        <div id="social-follow" class="d-none d-lg-block ie-flex">
-          <ul class="follow-icons navbar-nav">
-            <li class="nav-item"><a class="nav-link" target="_blank" href="https://twitter.com/carboline" title="Follow Carboline on Twitter"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
-                  <title>Carboline on Twitter</title>
-                  <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"></path>
-                </svg></a></li>
-            <li class="nav-item"><a class="nav-link" target="_blank" href="https://www.linkedin.com/company/carboline/" title="Follow Carboline on LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Carboline on LinkedIn" width="24" height="24" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 173 175">
-                  <title>Carboline on LinkedIn</title>
-                  <path d="M38.7,173H2.9V57.5H38.7ZM20.8,41.8A20.9,20.9,0,0,1,20.8,0a20.9,20.9,0,0,1,0,41.8ZM173,173H137.2V116.8c0-13.4-.3-30.6-18.7-30.6S97,100.8,97,115.8V173H61.2V57.5H95.6V73.3h.5c4.8-9.1,16.5-18.7,33.9-18.7,36.3,0,43,23.9,43,55V173Z" transform="translate(0 0)"></path>
-                </svg></a></li>
-            <li class="nav-item"><a class="nav-link" target="_blank" href="https://www.facebook.com/CarbolineCompany/" title="Follow Carboline on Facebook"><svg viewBox="0 0 21.406 43.754" role="img" xmlns="http://www.w3.org/2000/svg">
-                  <title>Carboline on Facebook</title>
-                  <path d="M5.43 43.754v-20.53H0V15.83h5.43V9.518C5.43 4.558 8.635 0 16.024 0c2.99 0 5.204.286 5.204.286l-.175 6.903s-2.257-.03-4.72-.03c-2.663 0-3.09 1.23-3.09 3.26v5.4h8.022l-.35 7.39h-7.672v20.53H5.43z"></path>
-                </svg></a></li>
-            <li class="nav-item"><a class="nav-link" href="http://test.carboline.com/solution-spot/rss" target="_blank" title="Solution Spot RSS Feed"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 448">
-                  <title>Solution Spot RSS Feed</title>
-                  <path d="M128.08,416a64,64,0,1,1-64-64,64,64,0,0,1,64,64Zm175.66,47.25c-8.35-154.6-132.18-278.59-286.95-286.95A16,16,0,0,0,0,192.25v48.07a16,16,0,0,0,14.89,16c111.83,7.28,201.47,96.7,208.77,208.77a16,16,0,0,0,16,14.89h48.07a16,16,0,0,0,16-16.79ZM448,463.5C439.6,229.68,251.46,40.44,16.5,32A16,16,0,0,0,0,48V96.08a16,16,0,0,0,15.45,16c191.18,7.84,344.63,161.32,352.47,352.47a16,16,0,0,0,16,15.45H432A16,16,0,0,0,448,463.5Z" transform="translate(0 -32)"></path>
-                </svg></a></li>
-          </ul>
-        </div>
+      </section>
+      <style>
+        #events-hero {
+          background: url("https://test.carboline.com/media/83457/thinman.jpg") top center no-repeat;
+          background-color: rgba(5, 5, 5, 0.65);
+          background-blend-mode: color;
+          background-size: cover;
+        }
 
-        <div class="d-block d-lg-none dropdown">
-          <button class="navbar-toggler" type="button" data-bs-toggle="dropdown" data-bs-target="#mobile-cat-dropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <ul id="mobile-cat-dropdown" class="d-block d-lg-none dropdown-menu dropdown-menu-end" data-popper-placement="top-end" aria-labeledby="categories-dropdown">
-            <li>
-              <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/application">application</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Coating%20Application">Coating Application</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Coating%20Inspection">Coating Inspection</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Coating%20Recommendation">Coating Recommendation</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Coating%20Science">Coating Science</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Fireproofing">Fireproofing</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Food%20and%20Beverage">Food and Beverage</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Linings">Linings</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/oil%20and%20gas">Oil and Gas</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Podcast">Podcast</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Rail">Rail</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/video">video</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="http://test.carboline.com/solution-spot/categories/Water%20and%20Wastewater">Water and Wastewater</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <main id="blog-home" role="main">
+      </style>
       <div class="container">
         <div class="row">
-          <div class="col-s-12 col-lg-3">
-            <div class="d-flex flex-row flex-nowrap">
-              <div class="dropdown d-inline-block d-lg-none col">
-                <a id="filter-toggle" class="drop-link text-small" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                  Filter <i class="bi bi-filter-left"></i>
-                </a>
-                <!-- DROPDOWN MENU  -->
-                <ul id="mobile-filters" class="dropdown-menu shadow-sm">
-                  <h5>Types</h5>
-                  <div id="m-type-filter">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="type-filter" value="all" data-tab="all" id="mAll" checked>
-                      <label class="form-check-label" for="mAll">
-                        All
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="type-filter" value="article" data-tab="articles" id="mArticle">
-                      <label class="form-check-label" for="mArticle">
-                        Articles
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="type-filter" value="brochure" data-tab="brochures" id="mBrochures">
-                      <label class="form-check-label" for="mBrochures">
-                        Brochures
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="type-filter" value="case-study" data-tab="case-studies" id="mCaseStudies">
-                      <label class="form-check-label" for="mCaseStudies">
-                        Case Studies
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="type-filter" value="guide" data-tab="guides" id="mGuides">
-                      <label class="form-check-label" for="mGuides">
-                        Guides
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="type-filter" value="podcast" data-tab="podcast" id="mPodcast">
-                      <label class="form-check-label" for="mPodcast">
-                        Podcast
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="type-filter" value="tool" data-tab="tools" id="mTools">
-                      <label class="form-check-label" for="mTools">
-                        Tools
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="type-filter" value="video" data-tab="videos" id="mVideos">
-                      <label class="form-check-label" for="mVideos">
-                        Videos
-                      </label>
-                    </div>
-                  </div>
-                  <h5>Categories</h5>
-                  <div id="m-cat-filters">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="Coating Application" name="Coating Application" name="Coating Application" name="coatingApplication" id="coatingApplicationMobile">
-                      <label class="form-check-label text-capitalize" for="coatingApplicationMobile">
-                        Coating Application
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="Coating Inspection" name="Coating Inspection" name="Coating Inspection" name="coatingInspection" id="coatingInspectionMobile">
-                      <label class="form-check-label text-capitalize" for="coatingInspectionMobile">
-                        Coating Inspection
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="Coating Recommendation" name="Coating Recommendation" id="coatingRecommendationMobile">
-                      <label class="form-check-label text-capitalize" for="coatingRecommendationMobile">
-                        Coating Recommendation
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="Coating Science" name="Coating Science" id="coatingScienceMobile">
-                      <label class="form-check-label text-capitalize" for="coatingScienceMobile">
-                        Coating Science
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="Fireproofing" name="Fireproofing" id="fireproofingMobile">
-                      <label class="form-check-label text-capitalize" for="fireproofingMobile">
-                        Fireproofing
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="Food and Beverage" name="Food and Beverage" id="foodAndBeverageMobile">
-                      <label class="form-check-label text-capitalize" for="foodAndBeverageMobile">
-                        Food and Beverage
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="Linings" name="Linings" id="liningsMobile">
-                      <label class="form-check-label text-capitalize" for="liningsMobile">
-                        Linings
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="Oil and Gas" name="Oil and Gas" id="oilAndGasMobile">
-                      <label class="form-check-label text-capitalize" for="oilAndGasMobile">
-                        Oil and Gas
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="Rail" name="Rail" id="railMobile">
-                      <label class="form-check-label text-capitalize" for="railMobile">
-                        Rail
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="Water and Wastewater" name="Water and Wastewater" id="waterAndWastewaterMobile">
-                      <label class="form-check-label text-capitalize" for="waterAndWastewaterMobile">
-                        Water and Wastewater
-                      </label>
-                    </div>
-                  </div>
-                  <div>
-                    <a id="m-clear-search" class="btn btn-blue">Clear All</a>
-                  </div>
-                </ul>
-              </div>
-              <div id="search-bar" class="col-9 col-lg-12">
-                <div class="input-group">
-                  <input id="spot-search" type="text" class="form-control" name="term" placeholder="Search">
-                  <button type="submit" class="btn btn-inline btn-blue" aria-label="blog-search-button">
-                    <i class="bi bi-search"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div id="category-filters" class="my-3 d-none d-lg-block">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Coating Application" name="coatingApplication" name="Coating Application" name="coatingApplication" id="coatingApplication">
-                <label class="form-check-label text-capitalize" for="coatingApplication">
-                  Coating Application
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Coating Inspection" name="coatingInspection" name="Coating Inspection" name="coatingInspection" id="coatingInspection">
-                <label class="form-check-label text-capitalize" for="coatingInspection">
-                  Coating Inspection
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Coating Recommendation" name="Coating Recommendation" id="coatingRecommendation">
-                <label class="form-check-label text-capitalize" for="coatingRecommendation">
-                  Coating Recommendation
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Coating Science" name="Coating Science" id="coatingScience">
-                <label class="form-check-label text-capitalize" for="coatingScience">
-                  Coating Science
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Fireproofing" name="Fireproofing" id="fireproofing">
-                <label class="form-check-label text-capitalize" for="fireproofing">
-                  Fireproofing
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Food and Beverage" name="Food and Beverage" id="foodAndBeverage">
-                <label class="form-check-label text-capitalize" for="foodAndBeverage">
-                  Food and Beverage
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Linings" name="Linings" id="linings">
-                <label class="form-check-label text-capitalize" for="linings">
-                  Linings
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Oil and Gas" name="Oil and Gas" id="oilAndGas">
-                <label class="form-check-label text-capitalize" for="oilAndGas">
-                  Oil and Gas
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Rail" name="Rail" id="rail">
-                <label class="form-check-label text-capitalize" for="rail">
-                  Rail
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Water and Wastewater" name="Water and Wastewater" id="waterAndWastewater">
-                <label class="form-check-label text-capitalize" for="waterAndWastewater">
-                  Water and Wastewater
-                </label>
-              </div>
-            </div>
-            <div class="d-none d-lg-block">
-              <a id="clear-search" class="btn btn-blue" >Clear All</a>
-            </div>
-          </div>
-          <div class="col-s-12 col-lg-9">
-            <ul id="type-tabs" class="nav nav-tabs" role="tablist">
-              <li class="nav-item" role="presentation">
-                <a href="#all" class="type-tab nav-link active" data-bs-toggle="tab" data-bs-target="#all" role="tab" aria-selected="true" aria-controls="all" data-filter="all">All</a>
-              </li>
-              <li class="nav-item" role="presentation">
-                <a class="type-tab nav-link" data-bs-toggle="tab" data-bs-target="#articles" role="tab" aria-selected="false" aria-labelledby="articles-tab" aria-controls="articles" data-filter="article"><i class="bi bi-pencil-fill"></i> Articles</a>
-              </li>
-              <li class="nav-item" role="presentation">
-                <a class="type-tab nav-link" data-bs-toggle="tab" data-bs-target="#brochures" role="tab" aria-selected="false" aria-controls="brochures" data-filter="brochure"><i class="bi bi-journal-album"></i> Brochures</a>
-              </li>
-              <li class="nav-item" role="presentation">
-                <a class="type-tab nav-link" data-bs-toggle="tab" data-bs-target="#case-studies" role="tab" aria-selected="false" aria-controls="case-studies" data-filter="case-study"><i class="bi bi-file-richtext"></i> Case Studies</a>
-              </li>              
-              <li class="nav-item" role="presentation">
-                <a class="type-tab nav-link" data-bs-toggle="tab" data-bs-target="#guides" role="tab" aria-selected="false" aria-controls="guides" data-filter="guide"><i class="bi bi-file-text"></i> Guides</a>
-              </li>
-              <li class="nav-item" role="presentation">
-                <a class="type-tab nav-link" data-bs-toggle="tab" data-bs-target="#podcast" role="tab" aria-selected="false" aria-controls="podcast" data-filter="podcast"><i class="bi bi-mic-fill"></i> Podcast</a>
-              </li>
-              <li class="nav-item" role="presentation">
-                <a class="type-tab nav-link" data-bs-toggle="tab" data-bs-target="#tools" role="tab" aria-selected="false" aria-controls="tools" data-filter="tool"><i class="bi bi-calculator-fill"></i> Tools</a>
-              </li>
-              <li class="nav-item" role="presentation">
-                <a class="type-tab nav-link" data-bs-toggle="tab" data-bs-target="#videos" role="tab" aria-selected="false" aria-controls="videos" data-filter="video"><i class="bi bi-play-circle-fill"></i> Videos</a>
-              </li>
-            </ul>
-            <div id="list-views" class="tab-content mt-3">
-              <div class="tab-pane active" id="all" role="tabpanel" aria-labelledby="all-tab"></div>
-              <div class="tab-pane" id="articles" role="tabpanel" aria-labelledby="articles-tab">...</div>
-              <div class="tab-pane" id="podcast" role="tabpanel" aria-labelledby="podcast-tab">...</div>
-              <div class="tab-pane" id="videos" role="tabpanel" aria-labelledby="videos-tab">...</div>
-              <div class="tab-pane" id="tools" role="tabpanel" aria-labelledby="tools-tab">...</div>
-              <div class="tab-pane" id="brochures" role="tabpanel" aria-labelledby="brochures-tab">...</div>
-              <div class="tab-pane" id="guides" role="tabpanel" aria-labelledby="guides-tab">...</div>
-              <div class="tab-pane" id="case-studies" role="tabpanel" aria-labelledby="case-studies-tab">...</div>
-              <ul id="blog-pager" class="pagination"></ul>
-            </div>
-
+          <div class="text-center pt-5">
+            <h2>Vermont should be beautiful this time of year, all that snow.</h2>
+            <p>My dear partner, when what's left of you gets around to what's left to be gotten, what's left to be gotten won't be worth getting, whatever it is you've got left.</p>
           </div>
         </div>
+        <!-- ! Start Events Module  -->
+        <div id="events">
+          <!-- ! Filters Div  -->
+          <div id="event-filters" class="row py-3 justify-content-center">
+            <div class="col-12 col-md">
+              <select class="form-select bg-light" id="type">
+                <option value="">Event Type</option>
+                True <option value="Exhibiting">Exhibiting</option>
+                <option value="Presenting">Presenting</option>
+                <option value="Training School">Training School</option>
+              </select>
+            </div>
+            <div class="col-12 col-md">
+              <select class="form-select bg-light" id="month">
+                <option value="">Month</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
 
+              </select>
+            </div>
+            <div class="col-12 col-md">
+              <select class="form-select bg-light" id="division">
+                <option value="">Division</option>
+                True <option value="Carboline">Carboline</option>
+                <option value="Dudick">Dudick</option>
+                <option value="SPC">SPC</option>
+
+              </select>
+            </div>
+            <div class="col-12 col-md">
+              <select class="form-select bg-light" id="country">
+                <option value="">Location</option>
+                True <option value="Canada">Canada</option>
+                <option value="Europe">Europe</option>
+                <option value="Mexico">Mexico</option>
+                <option value="Online">Online</option>
+                <option value="USA">USA</option>
+              </select>
+            </div>
+            <div class="col-12 col-md-auto">
+              <div class="input-group">
+                <input id="events-search" type="text" class="form-control" name="term" placeholder="Search Events" />
+                <button type="submit" class="btn btn-inline btn-blue" aria-label="event-search-button">
+                  <i class="bi bi-search"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-12 col-md-auto text-end">
+              <a id="clear-search" class="btn btn-blue text-nowrap my-3 my-md-0 ms-md-1">Clear All</a>
+            </div>
+          </div>
+          <!-- ! Actual List of items  -->
+          <ul id="event-list" class="list">
+            <li data-country="USA" class="card card-horizontal flex-wrap col-12 align-items-center mb-3">
+              <div class="card-header col-6 col-md-2 order-1">
+                <h5 class="text-uppercase"><span class="d-none month">11</span>Nov 29-01, 2023</h5>
+                <span class="text-muted">New Orleans, LA</span>
+              </div>
+              <div class="card-footer col-6 col-md-2 order-2 order-md-3 text-end">
+                <a href="https://www.workboatshow.com/" target="_blank" class="btn btn-blue">Learn More</a> </div>
+              <div class="w-100 d-block d-md-none"></div>
+              <div class="card-body col-12 col-md-8 order-3 order-md-2">
+                <h3><a href="https://test.carboline.com/news-events/events-calendar/workboat/" target="_blank" class="name bold">WorkBoat</a></h3>
+                <span class="division text-danger">Carboline</span>
+                <span>| </span>
+                <span class="type text-primary">Exhibiting</span>
+                <br>
+                <span class="description text-muted">I haven&#39;t got any thoughts! I&#39;m just staring, vacantly into space, while a distant voice in the back of my head goes &quot;Oh Shit,&quot; like a car alarm in the middle of the night.</span>
+              </div>
+            </li>
+            <li data-country="USA" class="card card-horizontal flex-wrap col-12 align-items-center mb-3">
+              <div class="card-header col-6 col-md-2 order-1">
+                <h5 class="text-uppercase"><span class="d-none month">11</span>Nov 27-29, 2023</h5>
+                <span class="text-muted">Wisconsin Dells, WI</span>
+              </div>
+              <div class="card-footer col-6 col-md-2 order-2 order-md-3 text-end">
+                <a href="https://convention.mwfpa.org/" target="_blank" class="btn btn-blue">Learn More</a> </div>
+              <div class="w-100 d-block d-md-none"></div>
+              <div class="card-body col-12 col-md-8 order-3 order-md-2">
+                <h3><a href="https://test.carboline.com/news-events/events-calendar/mwfpa/" target="_blank" class="name bold">MWFPA</a></h3>
+                <span class="division text-danger">SPC</span>
+                <span>| </span>
+                <span class="type text-primary">Presenting</span>
+                <br>
+                <span class="description text-muted">You people are as much fun as the plague. Remember the plague? And how much fun it was? That&#39;s this.</span>
+              </div>
+            </li>
+            <li data-country="Europe" class="card card-horizontal flex-wrap col-12 align-items-center mb-3">
+              <div class="card-header col-6 col-md-2 order-1">
+                <h5 class="text-uppercase"><span class="d-none month">11</span>Nov 14-15, 2023</h5>
+                <span class="text-muted">London, England, UK</span>
+              </div>
+              <div class="card-footer col-6 col-md-2 order-2 order-md-3 text-end">
+                <a href="https://www.londonbuildexpo.com/" target="_blank" class="btn btn-blue">Learn More</a> </div>
+              <div class="w-100 d-block d-md-none"></div>
+              <div class="card-body col-12 col-md-8 order-3 order-md-2">
+                <h3><a href="https://test.carboline.com/news-events/events-calendar/london-build/" target="_blank" class="name bold">London Build</a></h3>
+                <span class="division text-danger">Carboline</span>
+                <span>| </span>
+                <span class="type text-primary">Exhibiting</span>
+                <br>
+                <span class="description text-muted">&quot;Climb the mountain of conflict&quot;? You know what you sounded like? You sounded like a fucking Nazi Julie Andrews!</span>
+              </div>
+            </li>
+            <li data-country="Online" class="card card-horizontal flex-wrap col-12 align-items-center mb-3">
+              <div class="card-header col-6 col-md-2 order-1">
+                <h5 class="text-uppercase"><span class="d-none month">10</span>Oct 03-04, 2023</h5>
+                <span class="text-muted">Online</span>
+              </div>
+              <div class="card-footer col-6 col-md-2 order-2 order-md-3 text-end">
+              </div>
+              <div class="w-100 d-block d-md-none"></div>
+              <div class="card-body col-12 col-md-8 order-3 order-md-2">
+                <h3><a href="https://test.carboline.com/news-events/events-calendar/corrosion-school/" target="_blank" class="name bold">Corrosion School</a></h3>
+                <span class="division text-danger">Carboline</span>
+                <span>| </span>
+                <span class="type text-primary">Training School</span>
+                <br>
+                <span class="description text-muted"> If you listen to me instead of your only two brain cells that are too busy butt-fucking each other somewhere in the vast expanses of your misshapen skull, then maybe, Jonah, you might have a chance at becoming the first mentally impaired Frankenstein&#39;s monster to ever win an American election.</span>
+              </div>
+            </li>
+            <li data-country="USA" class="card card-horizontal flex-wrap col-12 align-items-center mb-3">
+              <div class="card-header col-6 col-md-2 order-1">
+                <h5 class="text-uppercase"><span class="d-none month">9</span>Sep 18-19, 2023</h5>
+                <span class="text-muted">St. Louis, MO</span>
+              </div>
+              <div class="card-footer col-6 col-md-2 order-2 order-md-3 text-end">
+              </div>
+              <div class="w-100 d-block d-md-none"></div>
+              <div class="card-body col-12 col-md-8 order-3 order-md-2">
+                <h3><a href="https://test.carboline.com/news-events/events-calendar/commercial-fireproofing-school/" target="_blank" class="name bold">Commercial Fireproofing School</a></h3>
+                <span class="division text-danger">Carboline</span>
+                <span>| </span>
+                <span class="type text-primary">Training School</span>
+                <br>
+                <span class="description text-muted">When a man is wrestling a leopard in the middle of a pond, he&#39;s in no position to run.</span>
+              </div>
+            </li>
+            <li data-country="USA" class="card card-horizontal flex-wrap col-12 align-items-center mb-3">
+              <div class="card-header col-6 col-md-2 order-1">
+                <h5 class="text-uppercase"><span class="d-none month">9</span>Sep 10-13, 2023</h5>
+                <span class="text-muted">Virginia Beach, VA</span>
+              </div>
+              <div class="card-footer col-6 col-md-2 order-2 order-md-3 text-end">
+                <a href="https://www.vaawwa.org/page/waterjam" target="_blank" class="btn btn-blue">Learn More</a> </div>
+              <div class="w-100 d-block d-md-none"></div>
+              <div class="card-body col-12 col-md-8 order-3 order-md-2">
+                <h3><a href="https://test.carboline.com/news-events/events-calendar/waterjam/" target="_blank" class="name bold">WaterJAM</a></h3>
+                <span class="division text-danger">Carboline</span>
+                <span>| </span>
+                <span class="type text-primary">Exhibiting</span>
+                <br>
+                <span class="description text-muted">I think we should use the &#39;carrot and stick&#39; approach. You take a carrot, stick it up his fuckin&#39; arse, followed by the stick, followed by an even bigger, rougher carrot.</span>
+              </div>
+            </li>
+            <li data-country="USA" class="card card-horizontal flex-wrap col-12 align-items-center mb-3">
+              <div class="card-header col-6 col-md-2 order-1">
+                <h5 class="text-uppercase"><span class="d-none month">9</span>Sep 10-11, 2023</h5>
+                <span class="text-muted">St. Louis, MO</span>
+              </div>
+              <div class="card-footer col-6 col-md-2 order-2 order-md-3 text-end">
+              </div>
+              <div class="w-100 d-block d-md-none"></div>
+              <div class="card-body col-12 col-md-8 order-3 order-md-2">
+                <h3><a href="https://test.carboline.com/news-events/events-calendar/rail-school/" target="_blank" class="name bold">Rail School</a></h3>
+                <span class="division text-danger">Dudick</span>
+                <span>| </span>
+                <span class="type text-primary">Training School</span>
+                <br>
+                <span class="description text-muted">I&#39;ll be with you in two shakes of a crying baby.</span>
+              </div>
+            </li>
+            <li data-country="Online" class="card card-horizontal flex-wrap col-12 align-items-center mb-3">
+              <div class="card-header col-6 col-md-2 order-1">
+                <h5 class="text-uppercase"><span class="d-none month">1</span>Jan 10-19, 2022</h5>
+                <span class="text-muted">Tativille, FR </span>
+              </div>
+              <div class="card-footer col-6 col-md-2 order-2 order-md-3 text-end">
+                <a href="https://youtu.be/dQw4w9WgXcQ?t=43" target="_blank" class="btn btn-blue">Learn More</a> </div>
+              <div class="w-100 d-block d-md-none"></div>
+              <div class="card-body col-12 col-md-8 order-3 order-md-2">
+                <h3><a href="https://test.carboline.com/news-events/events-calendar/concrete-carnival/" target="_blank" class="name bold">Concrete Carnival</a></h3>
+                <span class="division text-danger">SPC</span>
+                <span>| </span>
+                <span class="type text-primary">Presenting</span>
+                <br>
+                <span class="description text-muted">That&#39;s not the first time that that&#39;s happened, by the way. He&#39;s not supposed to register emotion. He&#39;s supposed to be like a robot geisha.</span>
+              </div>
+            </li>
+            </ul>
+          <ul id="events-pager" class="pagination"></ul>
+          </div>
       </div>
     </main>
   </div>

@@ -1,40 +1,19 @@
 import "regenerator-runtime/runtime.js";
-import { init, clearSearch } from './functions';
+// import { init, clearSearch } from './functions';
+import Selects from './form-replace';
+// ? Remove this dependency for test/prod? 
 import Drops from './dropdowns';
-// import Index from './search'
-let Parser = require('rss-parser');
-let parser = new Parser({
-  customFields: {
-    item: ['id', 'type', 'description', 'doclink', 'download', 'linkType']
-  }
-});
 
-// go to https://cors-anywhere.herokuapp.com/corsdemo
+// TODO: run init()? Either without any arguments OR 'event' div - Maybe ditch this file altogether and start right from functions.js? 
 
-// const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
-// parser.parseURL(
-//   CORS_PROXY + 'http://test.carboline.com/solution-spot/feed/',
-//   function(err, feed) {
-//     if (err) throw err;
-//     init(feed.items);
-//   }
-// );
-
-parser.parseURL('https://www.carboline.com/solution-spot/feed/', function(err, feed) {
-  if (err) throw err;
-  init(feed.items)
-})
-
-/*----------  For test site only  ----------*/
-
-// parser.parseURL('feed/', function(err, feed) {
-//   if (err) throw err;
-//   init(feed.items)
-// })
-
-/*=====  End of Test Site  ======*/
+// ! Drops() is only used for the main menu location dropdown so probably don't need this for test/prod 
 Drops();
-document.getElementById('clear-search').addEventListener('click', clearSearch);
-document
-  .getElementById('m-clear-search')
-  .addEventListener('click', clearSearch);
+Selects();
+
+
+// TODO: convert html list to JSON so I can use miniSerch instead?? Other option: create a feed like I did for solution spot
+const fullList = document.getElementById('event-list');
+console.log(`full list: ${JSON.stringify(fullList.children)}`);
+console.log(`child: ${JSON.stringify(fullList.children.item(0))}`)
+// init();
+// document.getElementById('clear-search').addEventListener('click', clearSearch);

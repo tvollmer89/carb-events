@@ -1,4 +1,4 @@
-// TODO: import filter funcion from 'functions'
+import {handleDrops} from './functions';
 const wrap = (el, wrapper) => {
   el.parentElement.insertBefore(wrapper, el);
   wrapper.appendChild(el);
@@ -28,7 +28,8 @@ const createEl = (type, classes, inner = '', text = '', rel) => {
   }
   return el;
 };
-export default function() {
+
+const replaceDrops = () => {
   var selects = document.querySelectorAll('select');
   selects.forEach(function(selectItem, idx, selectObj) {
     const filterCategory = selectItem.id;
@@ -87,12 +88,12 @@ export default function() {
         let val = selectedOpt.hasAttribute('rel')
           ? selectedOpt.getAttribute('rel')
           : '';
-        console.log(`value: ${val}`);
         e.stopPropagation();
         styledSelect.classList.remove('active');
         selectTextParent.textContent = selectedOpt.textContent;
         // TODO: call the filterList function on click
         selectedOpt.parentElement.style.display = 'none';
+        handleDrops(filterCategory, val);
       });
     }
 
@@ -100,6 +101,9 @@ export default function() {
     styledSelect.addEventListener('click', e => {
       e.stopPropagation();
       let current = e.target.parentElement;
+      if(e.target.tagName == "I") {
+        current = current.parentElement;
+      }
       document.querySelectorAll('.select-styled.active').forEach(s => {
         if (s != current) {
           s.classList.remove('active');
@@ -117,3 +121,18 @@ export default function() {
     });
   });
 }
+
+const clearDrops = () => {
+  console.log(`resetting dropdowns!`)
+  let selects = document.querySelectorAll('select');
+  selects.forEach((s) => {
+    let styledSelect = s.nextElementSibling;
+    let styledSelectTextContainer = styledSelect.firstElementChild;
+    let defaultText = s.firstElementChild.textContent;
+    s.selectedIndex = 0;
+    styledSelectTextContainer.textContent = defaultText;
+
+  })
+}
+
+export {replaceDrops, clearDrops}

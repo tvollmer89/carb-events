@@ -1,6 +1,9 @@
 import { initSearch, runSearch } from './search';
-const pager = document.getElementById('blog-pager'),
-  numPerPage = 10,
+import displayItem from './display-item';
+import {clearDrops} from './form-replace';
+const pager = document.getElementById('events-pager'),
+  listContainer = document.getElementById('event-list'),
+  numPerPage = 5,
   input = document.getElementById('events-search');
 // checksContainer = document.getElementById('category-filters'),
 // TODO: initialize dropdowns
@@ -11,11 +14,12 @@ let allItems = [],
   matchingItems = [];
 let filters = {
   t: '', //text
-  activeType: 'all',
-  catsChecked: []
+  type: '',
+  month: '',
+  division: '',
+  country: ''
 };
 
-// TODO: update 'feed' argument since building item list from existing html instead of xml feed
 const init = feed => {
   allItems = feed;
   matchingItems = feed;
@@ -23,34 +27,22 @@ const init = feed => {
   buildPage(1);
   buildPager(1, pageCount);
   initSearch(allItems);
-  addCategoryEvents();
   input.addEventListener('input', updateTextSearch);
 };
 
 /**
  * Checks filters and runs search or restarts list if there aren't any
  */
-const prepSearch = (newType = filters.activeType) => {
-  filters.activeType = newType;
-  if (
-    filters.catsChecked.length > 0 ||
-    filters.t.length > 2 ||
-    filters.activeType != 'all'
-  ) {
-    console.log(`yest it's true: ${JSON.stringify(filters)}`);
-    let r = runSearch(...Object.values(filters));
-    updateList(r);
-  } else {
-    matchingItems = allItems;
-    updatePage();
-  }
+const prepSearch = () => {
+  console.log(`yest it's true: ${JSON.stringify(filters)}`);
+  let r = runSearch(...Object.values(filters));
+  updateList(r);
 };
 
 // update matching items using item id's from search results
 const updateList = results => {
   if (results.length == 0) {
-    // TODO: Update this to put this html onto screen
-    // activeTab.innerHTML = `<p>No items found matching your search.</p>`;
+    listContainer.innerHTML = `<p>No items found matching your search.</p>`;
     pager.textContent = '';
     return;
   }
@@ -59,7 +51,8 @@ const updateList = results => {
   });
   if (filters.t == '') {
     let temp = matchingItems.sort((a, b) => {
-      return new Date(b.pubDate) - new Date(a.pubDate);
+      // ! reverse this if needed 
+      return new Date(b.startDate) - new Date(a.startDate);
     });
     matchingItems = temp;
   }
@@ -67,8 +60,6 @@ const updateList = results => {
 };
 
 const updatePage = (newPage = 1) => {
-  console.log(`matching: ${matchingItems.length}`);
-
   let pageCount = Math.ceil(matchingItems.length / numPerPage);
   buildPage(newPage, matchingItems);
   buildPager(newPage, pageCount);
@@ -76,42 +67,25 @@ const updatePage = (newPage = 1) => {
 
 const updateTextSearch = e => {
   filters.t = e.target.value;
+  // * Only run search when more than 3 characters are entered 
   if (filters.t.length > 0 && filters.t.length < 3) {
     return;
   }
   prepSearch();
 };
 
-// const addCategoryEvents = () => {
-//   checks.forEach(input => {
-//     input.addEventListener('change', function(e) {
-//       let val = e.target.value.toLowerCase();
-//       let mCheck = mContainer.querySelector(`input[value="${e.target.value}"]`);
-//       console.log(`mCheck: ${mCheck}`);
-//       if (e.target.checked) {
-//         filters.catsChecked.push(val);
-//         mCheck.checked = true;
-//       } else {
-//         mCheck.checked = false;
-//         let i = filters.catsChecked.indexOf(val);
-//         filters.catsChecked.splice(i, 1);
-//       }
-//       prepSearch();
-//     });
-//   });
-// };
+const handleDrops = (category, value) => {
+  console.log(`filter category: ${category}, value: ${value}`);
+  filters[category] = value;
+  prepSearch();
+}
 
 const clearSearch = () => {
-  // document.getElementById('mAll').checked = true;
-  // checks.forEach(i => {
-  //   i.checked = false;
-  // });
-  // mChecks.forEach(i => {
-  //   i.checked = false;
-  // });
-
-  filters.catsChecked = [];
-  filters.t = '';
+  // TODO: reset dropdown menus 
+  clearDrops();
+  for(const p in filters){
+    filters[p] = ''
+  }
   input.value = '';
   matchingItems = allItems;
   updatePage();
@@ -220,151 +194,15 @@ const addPagerEvents = links => {
   });
 };
 
-/**
- * 
- * @param {object} entry document/article in solution spot feed
- */
-function displayItem(entry) {
-  let html = ``;
-  switch (entry.type) {
-    case 'guide':
-      let target = entry.linkType ? '_blank' : '_self';
-      html += `<h3><a href="${entry.doclink}" target=${target}>${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-file-text"></i></span>`;
-      if ('categories' in entry) {
-        html += `<span class="card-category">${entry.categories.join(
-          ', '
-        )}</span>`;
-      }
-      html += `<p>${entry.description}</p>`;
-      break;
-    case 'brochure':
-      html += `<h3>${entry.title}</h3><span class="card-type me-2"><i class="bi bi-journal-album"></i></span>`;
-      if ('categories' in entry) {
-        html += `<span class="card-category">${entry.categories.join(
-          ', '
-        )}</span>`;
-      }
-      if (entry.description != '') {
-        html += `<p>${entry.description}</p>`;
-      }
-      html += `<div class="mb-3"><a class="btn btn-blue" href="${entry.doclink}">Download</a></div>`;
-      break;
-    case 'tool':
-      html += `<h3><a href="${entry.doclink}" target="_blank">${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-calculator-fill"></i></span>`;
-      if ('categories' in entry) {
-        html += `<span class="card-category">${entry.categories.join(
-          ', '
-        )}</span>`;
-      }
-      html += `<p>${entry.description}</p>`;
-      break;
-    case 'case-study':
-      if (entry.hasOwnProperty('download')) {
-        html += `<h3>${entry.title}</h3><span class="card-type me-2"><i class="bi bi-journal-album"></i></span>`;
-        if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(
-            ', '
-          )}</span>`;
-        }
-        if (entry.description != '') {
-          html += `<p>${entry.description}</p>`;
-        }
-        html += `<div class="mb-3"><a class="btn btn-blue" href="${entry.doclink}">Download</a></div>`;
-      } else {
-        html += `<h3><a href="${entry.link}">${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-file-richtext"></i></span>`;
-        if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(
-            ', '
-          )}</span>`;
-        }
-        html += `<p>${entry.description}</p>`;
-      }
-      break;
-    case 'podcast':
-      if (entry.hasOwnProperty('doclink')) {
-        // console.log(`podcast link: ${JSON.stringify(entry)}`);
-        let target = '_self';
-        if (entry.hasOwnProperty('linkType')) {
-          target = !entry.linkType ? '_self' : '_blank';
-        }
-        html += `<h3><a href="${entry.doclink}" target=${target}>${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-mic-fill"></i></span>`;
-        if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(
-            ', '
-          )}</span>`;
-        }
-        html += `<p>${entry.description}</p>`;
-      } else {
-        html += `<h3><a href="${entry.link}">${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-mic-fill"></i></span>`;
-        if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(
-            ', '
-          )}</span>`;
-        }
-        html += `<p>${entry.description}</p>`;
-      }
-      break;
-    case 'video':
-      if (entry.hasOwnProperty('doclink')) {
-        // console.log(`podcast link: ${JSON.stringify(entry)}`);
-        let target = '_self';
-        if (entry.hasOwnProperty('linkType')) {
-          target = !entry.linkType ? '_self' : '_blank';
-        }
-        html += `<h3><a href="${entry.doclink}" target=${target}>${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-mic-fill"></i></span>`;
-        if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(
-            ', '
-          )}</span>`;
-        }
-        html += `<p>${entry.description}</p>`;
-      } else {
-        html += `<h3><a href="${entry.link}">${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-play-circle-fill"></i></span>`;
-        if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(
-            ', '
-          )}</span>`;
-        }
-        html += `<p>${entry.description}</p>`;
-      }
-      break;
-    default:
-      if (entry.hasOwnProperty('doclink')) {
-        // console.log(`podcast link: ${JSON.stringify(entry)}`);
-        let target = '_self';
-        if (entry.hasOwnProperty('linkType')) {
-          target = !entry.linkType ? '_self' : '_blank';
-        }
-        html += `<h3><a href="${entry.doclink}" target=${target}>${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-mic-fill"></i></span>`;
-        if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(
-            ', '
-          )}</span>`;
-        }
-        html += `<p>${entry.description}</p>`;
-      } else {
-        html += `<h3><a href="${entry.link}">${entry.title}</a></h3><span class="card-type me-2"><i class="bi bi-pencil-fill"></i></span>`;
-        if ('categories' in entry) {
-          html += `<span class="card-category">${entry.categories.join(
-            ', '
-          )}</span>`;
-        }
-        html += `<p>${entry.description}</p>`;
-      }
-      break;
-  }
-  // TODO: Update this to change HTML on screen
-  // activeTab.innerHTML += `<div class="blog-card">${html}</div>`;
-}
+
 
 const buildPage = (currPage, list = allItems) => {
   const trimStart = (currPage - 1) * numPerPage;
   const trimEnd = trimStart + numPerPage;
-  // TODO: Update this to change HTML on screen
-  // activeTab.textContent = '';
-  list.slice(trimStart, trimEnd).forEach(i => displayItem(i));
+  listContainer.textContent = '';
+  list.slice(trimStart, trimEnd).forEach(i => displayItem(i, listContainer));
 };
 
-export { init, clearSearch };
+export { init, clearSearch, handleDrops };
 
 // buildPage(${totalPages}, list)

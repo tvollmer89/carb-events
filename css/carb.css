@@ -8415,7 +8415,8 @@ textarea:placeholder-shown {
         color: #000; }
     .select-options li[rel='hide'] {
       display: none; }
-    .select-options li[rel=""] {
+    .select-options li[rel=""],
+    .select-options li:first-child {
       color: #6c757d; }
 
 #product-search {
@@ -9240,11 +9241,8 @@ main {
   margin-bottom: 0; }
 
 .author-post-title {
-  color: #000; }
-
-.author-post:hover-title {
-  color: #00a1df; }
-
+  color: #000;
+  }
 /**
  *
  * Layout - making dedicated file for more customization later

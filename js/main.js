@@ -24,8 +24,8 @@ let parser = new Parser({
 // );
 
 
-// ! REPLACE URL FOR PROD SITE
-parser.parseURL('https://test.carboline.com/news-events/feed/', function(err, feed) {
+// ! REPLACE URL FOR PROD SITE to https://www.carboline.com/events-feed/
+parser.parseURL('https://www.carboline.com/events-feed/', function(err, feed) {
   if (err) throw err;
   init(feed.items)
 })

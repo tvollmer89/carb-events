@@ -25,6 +25,7 @@ let parser = new Parser({
 
 
 // ! REPLACE URL FOR PROD SITE to https://www.carboline.com/events-feed/
+// Test feed: https://test.carboline.com/news-events/feed/
 parser.parseURL('https://www.carboline.com/events-feed/', function(err, feed) {
   if (err) throw err;
   init(feed.items)
@@ -39,6 +40,6 @@ replaceDrops();
 
 // TODO: convert html list to JSON so I can use miniSerch instead?? Other option: create a feed like I did for solution spot
 const fullList = document.getElementById('event-list');
-console.log(`full list: ${JSON.stringify(fullList.children)}`);
+// console.log(`full list: ${JSON.stringify(fullList.children)}`);
 
 document.getElementById('clear-search').addEventListener('click', clearSearch);

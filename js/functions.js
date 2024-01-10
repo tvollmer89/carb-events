@@ -52,7 +52,7 @@ const updateList = results => {
   if (filters.t == '') {
     let temp = matchingItems.sort((a, b) => {
       // ! reverse this if needed 
-      return new Date(b.startDate) - new Date(a.startDate);
+      return new Date(a.startDate) - new Date(b.startDate);
     });
     matchingItems = temp;
   }
